@@ -3,6 +3,7 @@ BlockBee's Python Helper
 """
 
 import requests
+from requests.models import PreparedRequest
 
 
 class Helper:
@@ -33,6 +34,11 @@ class Helper:
 
         coin = self.coin
 
+        if self.parameters:
+            req = PreparedRequest()
+            req.prepare_url(self.callback_url, self.parameters)
+            self.callback_url = req.url
+
         params = {
             'callback': self.callback_url,
             'apikey': self.api_key,
@@ -54,6 +60,11 @@ class Helper:
 
         if coin is None or callback_url is None:
             return None
+
+        if self.parameters:
+            req = PreparedRequest()
+            req.prepare_url(self.callback_url, self.parameters)
+            self.callback_url = req.url
 
         params = {
             'callback': callback_url,
