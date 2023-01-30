@@ -1,6 +1,6 @@
 import BlockBee
 
-apikey = '1mzfJHkAf8beGdmGJMhpS9qrm6T9HTcN0foroAGLZQNWzjicMUhP2EgNSM5F1cFY'  # <- Insert your API Key here to run the tests
+apikey = ''  # <- Insert your API Key here to run the tests
 
 bb = BlockBee.Helper('bep20_usdt', '',
                      'https://webhook.site/15d94bb3-c3ae-4b68-8120-5dd962988a6d', {
