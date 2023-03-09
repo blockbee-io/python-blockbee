@@ -1,8 +1,8 @@
-import BlockBee
+from blockbee import BlockBeeHelper
 
 apikey = ''  # <- Insert your API Key here to run the tests
 
-bb = BlockBee.Helper('bep20_usdt', '',
+bb = BlockBeeHelper('bep20_usdt', '',
                      'https://webhook.site/15d94bb3-c3ae-4b68-8120-5dd962988a6d', {
                          'order_id': 13435
                      }, {
@@ -20,13 +20,13 @@ print(address)
 Get coin information
 """
 print('get_info:')
-print(BlockBee.Helper.get_info('btc', api_key=apikey))
+print(BlockBeeHelper.get_info('btc', api_key=apikey))
 
 """
 Get all supported coins
 """
 print('get_supported_coins:')
-print(BlockBee.Helper.get_supported_coins(api_key=apikey))
+print(BlockBeeHelper.get_supported_coins(api_key=apikey))
 
 """
 Get Logs

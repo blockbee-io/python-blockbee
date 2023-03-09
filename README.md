@@ -26,15 +26,15 @@ or
 ### Importing in your project file
 
 ```python
-import BlockBee
+from blockbee import BlockBeeHelper
 ```
 
 ### Generating a new Address
 
 ```python
-import BlockBee
+from blockbee import BlockBeeHelper
 
-bb = BlockBee.Helper(coin, own_address, callback_url, params, bb_params, api_key)
+bb = BlockBeeHelper(coin, own_address, callback_url, params, bb_params, api_key)
 
 address = bb.getAddress()['address_in']
 ```
@@ -56,9 +56,10 @@ Where:
 ### Checking the logs of a request
 
 ```python
-import BlockBee
 
-bb = BlockBee.Helper(coin, own_address, callback_url, params, bb_params, api_key)
+from blockbee import BlockBeeHelper
+
+bb = BlockBeeHelper(coin, own_address, callback_url, params, bb_params, api_key)
 
 data = bb.get_logs()
 ```
@@ -67,9 +68,9 @@ data = bb.get_logs()
 ### Generating a QR code
 
 ```python
-import BlockBee
+from blockbee import BlockBeeHelper
 
-bb = BlockBee.Helper(coin, own_address, callback_url, params, bb_params, api_key)
+bb = BlockBeeHelper(coin, own_address, callback_url, params, bb_params, api_key)
 
 ###
 
@@ -87,9 +88,9 @@ For QR Code generation:
 ### Estimating transaction fees
 
 ```python
-import BlockBee
+from blockbee import BlockBeeHelper
 
-fees = BlockBee.Helper.get_estimate(coin, addresses, priority, api_key)
+fees = BlockBeeHelper.get_estimate(coin, addresses, priority, api_key)
 ```
 Where: 
 * ``coin`` is the coin you wish to check, from BlockBee's supported currencies (e.g 'btc', 'eth', 'erc20_usdt', ...)
@@ -102,9 +103,9 @@ Where:
 ### Converting between coins and fiat
 
 ```python
-import BlockBee
+from blockbee import BlockBeeHelper
 
-conversion = BlockBee.Helper.get_conversion(value, from_coin, api_key)
+conversion = BlockBeeHelper.get_conversion(value, from_coin, api_key)
 ```
 Where:
 * ``coin`` the target currency to convert to, from BlockBee's supported currencies (e.g 'btc', 'eth', 'erc20_usdt', ...)
@@ -115,10 +116,11 @@ Where:
 > Response is an object with ``value_coin`` and ``exchange_rate``, see https://docs.blockbee.io/#operation/convert for more information.
 
 ### Getting supported coins
-```python
-import BlockBee
 
-supportedCoins = BlockBee.Helper.get_supported_coins(api_key)
+```python
+from blockbee import BlockBeeHelper
+
+supportedCoins = BlockBeeHelper.get_supported_coins(api_key)
 ```
 Where: 
 * ``api_key`` is the API Key provided by BlockBee's [dashboard](https://dash.blockbee.io/).
@@ -137,4 +139,11 @@ Contact us @ https://blockbee.io/contacts/
 * Initial Release
 
 #### 1.0.1
+* Minor fixes
+
+#### 1.0.2
+* Minor fixes
+
+#### 1.0.3
+* Fix import
 * Minor fixes

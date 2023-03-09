@@ -6,7 +6,7 @@ import requests
 from requests.models import PreparedRequest
 
 
-class Helper:
+class BlockBeeHelper:
     BLOCKBEE_URL = 'https://api.blockbee.io/'
     BLOCKBEE_HOST = 'api.blockbee.io'
 
@@ -47,7 +47,7 @@ class Helper:
         if self.own_address is not None:
             params['address'] = self.own_address
 
-        _address = Helper.process_request(coin, endpoint='create', params=params)
+        _address = BlockBeeHelper.process_request(coin, endpoint='create', params=params)
         if _address:
             self.payment_address = _address['address_in']
             return _address
@@ -71,7 +71,7 @@ class Helper:
             'apikey': self.api_key
         }
 
-        _logs = Helper.process_request(coin, endpoint='logs', params=params)
+        _logs = BlockBeeHelper.process_request(coin, endpoint='logs', params=params)
 
         if _logs:
             return _logs
@@ -91,7 +91,7 @@ class Helper:
         if value:
             params['value'] = value
 
-        _qrcode = Helper.process_request(self.coin, endpoint='qrcode', params=params)
+        _qrcode = BlockBeeHelper.process_request(self.coin, endpoint='qrcode', params=params)
 
         if _qrcode:
             return _qrcode
@@ -108,7 +108,7 @@ class Helper:
             'apikey': api_key
         }
 
-        _value = Helper.process_request(self.coin, endpoint='convert', params=params)
+        _value = BlockBeeHelper.process_request(self.coin, endpoint='convert', params=params)
 
         if _value:
             return _value
@@ -120,7 +120,7 @@ class Helper:
         if api_key is None:
             raise Exception("API Key Missing")
 
-        _info = Helper.process_request(coin, endpoint='info', params={
+        _info = BlockBeeHelper.process_request(coin, endpoint='info', params={
             'apikey': api_key
         })
 
@@ -134,7 +134,7 @@ class Helper:
         if api_key is None:
             raise Exception("API Key Missing")
 
-        _info = Helper.get_info('', api_key=api_key)
+        _info = BlockBeeHelper.get_info('', api_key=api_key)
 
         _info.pop('fee_tiers', None)
 
@@ -161,7 +161,7 @@ class Helper:
             'apikey': api_key
         }
 
-        _estimate = Helper.process_request(coin, endpoint='estimate', params=params)
+        _estimate = BlockBeeHelper.process_request(coin, endpoint='estimate', params=params)
 
         if _estimate:
             return _estimate
@@ -175,12 +175,12 @@ class Helper:
 
         response = requests.get(
             url="{base_url}{coin}{endpoint}/".format(
-                base_url=Helper.BLOCKBEE_URL,
+                base_url=BlockBeeHelper.BLOCKBEE_URL,
                 coin=coin.replace('_', '/'),
                 endpoint=endpoint,
             ),
             params=params,
-            headers={'Host': Helper.BLOCKBEE_HOST},
+            headers={'Host': BlockBeeHelper.BLOCKBEE_HOST},
         )
 
         return response.json()
