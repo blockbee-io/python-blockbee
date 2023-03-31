@@ -51,3 +51,9 @@ Get Estimate
 """
 print('Get Estimate')
 print(bb.get_estimate('ltc', api_key=apikey))
+
+"""
+Create Payout
+"""
+print('Create Payout')
+print(bb.create_payout('bep20_usdt', '0xA6B78B56ee062185E405a1DDDD18cE8fcBC4395d', 1, api_key=apikey))

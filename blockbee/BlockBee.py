@@ -169,6 +169,24 @@ class BlockBeeHelper:
         return None
 
     @staticmethod
+    def create_payout(coin, address, value, api_key=''):
+        if api_key is None:
+            raise Exception("API Key Missing")
+
+        params = {
+            'value': value,
+            'address': address,
+            'apikey': api_key
+        }
+
+        _payout = BlockBeeHelper.process_request(coin, endpoint='payout', params=params)
+
+        if _payout:
+            return _payout
+
+        return None
+
+    @staticmethod
     def process_request(coin='', endpoint='', params=None):
         if coin != '':
             coin += '/'
