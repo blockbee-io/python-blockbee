@@ -72,8 +72,6 @@ from blockbee import BlockBeeHelper
 
 bb = BlockBeeHelper(coin, own_address, callback_url, params, bb_params, api_key)
 
-###
-
 qr_code = bb.get_qrcode(value, size)
 ```
 For object creation, same parameters as before. You must first call ``getAddress` as this method requires the payment address to have been created.
@@ -105,7 +103,9 @@ Where:
 ```python
 from blockbee import BlockBeeHelper
 
-conversion = BlockBeeHelper.get_conversion(value, from_coin, api_key)
+bb = BlockBeeHelper(coin, own_address, callback_url, params, bb_params, api_key)
+
+conversion = bb.get_conversion(value, from_coin, api_key)
 ```
 Where:
 * ``coin`` the target currency to convert to, from BlockBee's supported currencies (e.g 'btc', 'eth', 'erc20_usdt', ...)
