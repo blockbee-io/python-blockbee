@@ -36,7 +36,7 @@ from blockbee import BlockBeeHelper
 
 bb = BlockBeeHelper(coin, own_address, callback_url, params, bb_params, api_key)
 
-address = bb.getAddress()['address_in']
+address = bb.get_address()['address_in']
 ```
 
 Where:
