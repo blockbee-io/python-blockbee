@@ -179,7 +179,7 @@ class BlockBeeHelper:
             'apikey': api_key
         }
 
-        _payout = BlockBeeHelper.process_request(coin, endpoint='payout', params=params)
+        _payout = BlockBeeHelper.process_request(coin, endpoint='payout/request/create', params=params)
 
         if _payout:
             return _payout
