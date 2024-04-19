@@ -203,7 +203,7 @@ class BlockBeeHelper:
         params = {
             'apikey': api_key,
             'status': status,
-            'page': page
+            'p': page
         }
 
         endpoint = 'payout/list'
