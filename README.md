@@ -109,7 +109,6 @@ For object creation, same parameters as before. You must first call ``getAddress
 
 * ``value`` is the value requested to the user in the coin to which the request was done. **Optional**, can be empty if you don't wish to add the value to the QR Code.
 * ``size`` Size of the QR Code image in pixels. Optional, leave empty to use the default size of 512.
-* ``api_key`` is the API Key provided by BlockBee's [dashboard](https://dash.blockbee.io/).
 
 > Response is an object with `qr_code` (base64 encoded image data) and `payment_uri` (the value encoded in the QR), see https://docs.blockbee.io/#operation/qrcode for more information.
 
@@ -132,14 +131,13 @@ For object creation, same parameters as before. You must first call ``getAddress
 ```python
 from blockbee import BlockBeeHelper
 
-fees = BlockBeeHelper.get_estimate(coin, addresses, priority, api_key)
+fees = BlockBeeHelper.get_estimate(coin, addresses, priority)
 ```
 
 #### Where: 
 * ``coin`` is the coin you wish to check, from BlockBee's supported currencies (e.g 'btc', 'eth', 'erc20_usdt', ...)
 * ``addresses`` The number of addresses to forward the funds to. Optional, defaults to 1.
 * ``priority`` Confirmation priority, (check [this](https://support.blockbee.io/article/how-the-priority-parameter-works) article to learn more about it). Optional, defaults to ``default``.
-* ``api_key`` is the API Key provided by BlockBee's [dashboard](https://dash.blockbee.io/).
 
 > Response is an object with ``estimated_cost`` and ``estimated_cost_usd``, see https://docs.blockbee.io/#operation/estimate for more information.
 
@@ -165,7 +163,7 @@ from blockbee import BlockBeeHelper
 
 bb = BlockBeeHelper(coin, own_address, callback_url, params, bb_params, api_key)
 
-conversion = bb.get_conversion(value, from_coin, api_key)
+conversion = bb.get_conversion(value, from_coin)
 ```
 
 #### Where:
@@ -173,7 +171,6 @@ conversion = bb.get_conversion(value, from_coin, api_key)
 * ``coin`` the target currency to convert to, from BlockBee's supported currencies (e.g 'btc', 'eth', 'erc20_usdt', ...)
 * ``value`` value to convert in `from`.
 * ``from_coin`` currency to convert from, FIAT or crypto.
-* ``api_key`` is the API Key provided by BlockBee's [dashboard](https://dash.blockbee.io/).
 
 > Response is an object with ``value_coin`` and ``exchange_rate``, see https://docs.blockbee.io/#operation/convert for more information.
 
@@ -192,11 +189,8 @@ conversion = bb.get_conversion(value, from_coin, api_key)
 ```python
 from blockbee import BlockBeeHelper
 
-supportedCoins = BlockBeeHelper.get_supported_coins(api_key)
+supportedCoins = BlockBeeHelper.get_supported_coins()
 ```
-
-### Where: 
-* ``api_key`` is the API Key provided by BlockBee's [dashboard](https://dash.blockbee.io/).
 
 > Response is an array with all supported coins.
 
@@ -382,8 +376,8 @@ If `process` is `false`.
 {
   "status": "success",
   "request_ids": [
-    103227,
-    103228
+    "42d5245e-0a29-402a-9a7e-355e38f1d81d",
+    "080a546e-4045-4c73-870c-4d9ec08c9cab"
   ]
 }
 ```
@@ -392,6 +386,23 @@ If `process` is `true`.
 ```json
 {
   "status": "success",
+  "payout_info": {
+    "id": "88e5eacc-d5a5-4b8a-8133-e23136151b7c",
+    "status": "Pending Payment",
+    "from": "0x18B211A1Ba5880C7d62C250B6441C2400d588589",
+    "requests": {
+      "0xA6B78B56ee062185E405a1DDDD18cE8fcBC4395d": "0.5",
+      "0x18B211A1Ba5880C7d62C250B6441C2400d588589": "0.1"
+    },
+    "total_requested": "0.6",
+    "total_with_fee": "0.603",
+    "error": "None",
+    "blockchain_fee": 0,
+    "fee": "0.003",
+    "coin": "bep20_usdt",
+    "txid": "",
+    "timestamp": "23/04/2024 11:13:49"
+  },
   "queued": true
 }
 ```
@@ -424,7 +435,7 @@ create_payout = BlockBeeHelper.list_payouts(coin, status, page, api_key, payout_
   "status": "success",
   "payouts": [
     {
-      "id": 2460,
+      "id": "88e5eacc-d5a5-4b8a-8133-e23136151b7c",
       "status": "Done",
       "total_requested": "0.6",
       "total_with_fee": "0.606",
@@ -482,7 +493,7 @@ payout = BlockBeeHelper.create_payout_by_ids(api_key, payout_ids)
 {
   "status": "success",
   "payout_info": {
-    "id": 2461,
+    "id": "88e5eacc-d5a5-4b8a-8133-e23136151b7c",
     "status": "Created",
     "from": "",
     "requests": {
@@ -545,7 +556,7 @@ status = BlockBeeHelper.check_payout_status(api_key, payout_id)
 {
   "status": "success",
   "payout_info": {
-    "id": 2463,
+    "id": "88e5eacc-d5a5-4b8a-8133-e23136151b7c",
     "status": "Done",
     "from": "0x18B211A1Ba5880C7d62C250B6441C2400d588589",
     "requests": {
@@ -598,6 +609,10 @@ Contact us @ https://blockbee.io/contacts/
 
 #### 2.0.1
 * Minor bugfixes
+
+#### 2.1.0
+* Minor bugfixes
+* Improve error handling
 
 ### Breaking Changes
 

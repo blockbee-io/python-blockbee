@@ -1,23 +1,16 @@
-"""
-BlockBee's Checkout Python Helper
-"""
-
-import requests
 from requests.models import PreparedRequest
+from .BlockBeeRequests import BlockBeeRequests as Req
 
 
 class BlockBeeCheckoutHelper:
-    BLOCKBEE_URL = 'https://api.blockbee.io/'
-    BLOCKBEE_HOST = 'api.blockbee.io'
-
     def __init__(self, api_key, parameters=None, bb_params=None):
-        if parameters is None:
+        if not parameters:
             parameters = {}
 
-        if bb_params is None:
+        if not bb_params:
             bb_params = {}
 
-        if api_key is None:
+        if not api_key:
             raise Exception("API Key Missing")
 
         self.parameters = parameters
@@ -25,9 +18,6 @@ class BlockBeeCheckoutHelper:
         self.api_key = api_key
 
     def payment_request(self, redirect_url, value):
-        if redirect_url is None or value is None:
-            return None
-
         if self.parameters:
             req = PreparedRequest()
             req.prepare_url(redirect_url, self.parameters)
@@ -39,31 +29,18 @@ class BlockBeeCheckoutHelper:
             'value': value,
             **self.bb_params}
 
-        _request = BlockBeeCheckoutHelper.process_request('', endpoint='checkout/request', params=params)
-        if _request['status'] == 'success':
-            return _request
-        return None
+        return Req.process_request_get(None, endpoint='checkout/request', params=params)
 
     @staticmethod
     def payment_logs(token, api_key):
-        if token is None or api_key is None:
-            return None
-
         params = {
             'apikey': api_key,
             'token': token
         }
 
-        _request = BlockBeeCheckoutHelper.process_request('', endpoint='checkout/logs', params=params)
-
-        if _request['status'] == 'success':
-            return _request
-        return None
+        return Req.process_request_get(None, endpoint='checkout/logs', params=params)
 
     def deposit_request(self, notify_url):
-        if notify_url is None:
-            return None
-
         if self.parameters:
             req = PreparedRequest()
             req.prepare_url(notify_url, self.parameters)
@@ -74,41 +51,13 @@ class BlockBeeCheckoutHelper:
             'apikey': self.api_key,
             **self.bb_params}
 
-        _request = BlockBeeCheckoutHelper.process_request('', endpoint='deposit/request', params=params)
-
-        if _request['status'] == 'success':
-            return _request
-        return None
+        return Req.process_request_get(None, endpoint='deposit/request', params=params)
 
     @staticmethod
     def deposit_logs(token, api_key):
-        if token is None or api_key is None:
-            return None
-
         params = {
             'apikey': api_key,
             'token': token
         }
 
-        _request = BlockBeeCheckoutHelper.process_request('', endpoint='deposit/logs', params=params)
-
-        if _request['status'] == 'success':
-            return _request
-        return None
-
-    @staticmethod
-    def process_request(coin='', endpoint='', params=None):
-        if coin != '':
-            coin += '/'
-
-        response = requests.get(
-            url="{base_url}{coin}{endpoint}/".format(
-                base_url=BlockBeeCheckoutHelper.BLOCKBEE_URL,
-                coin=coin.replace('_', '/'),
-                endpoint=endpoint,
-            ),
-            params=params,
-            headers={'Host': BlockBeeCheckoutHelper.BLOCKBEE_HOST},
-        )
-
-        return response.json()
+        return Req.process_request_get(None, endpoint='deposit/logs', params=params)

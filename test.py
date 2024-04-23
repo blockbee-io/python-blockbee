@@ -27,12 +27,12 @@ Get BlockBee Address
 """
 Get coin information
 """
-# print(BlockBeeHelper.get_info('btc', api_key=apikey))
+# print(BlockBeeHelper.get_info('btc'))
 
 """
 Get all supported coins
 """
-# print(BlockBeeHelper.get_supported_coins(api_key=apikey))
+# print(BlockBeeHelper.get_supported_coins())
 
 """
 Get Logs
@@ -47,7 +47,7 @@ Get QR Code
 """
 Get Conversion
 """
-# print(bb.get_conversion('eur', 100, api_key=apikey))
+# print(bb.get_conversion('eur', 100))
 
 """
 Get Estimate
@@ -58,7 +58,7 @@ Get Estimate
 Create Payout
 """
 # print(BlockBeeHelper.create_payout(
-#     'polygon_matic',
+#     'bep20_usdt',
 #     {
 #         '0xA6B78B56ee062185E405a1DDDD18cE8fcBC4395d': 0.5,
 #         '0x18B211A1Ba5880C7d62C250B6441C2400d588589': 0.1
@@ -70,7 +70,7 @@ Create Payout
 """
 List Payouts
 """
-# print(BlockBeeHelper.list_payouts('polygon_matic', api_key=apikey, payout_request=True))
+# print(BlockBeeHelper.list_payouts('polygon_matic', api_key=apikey, payout_request=True, page=1))
 
 """
 Get payout wallet
@@ -80,17 +80,17 @@ Get payout wallet
 """
 Create payout by Payout Request IDs
 """
-# print(BlockBeeHelper.create_payout_by_ids(api_key=apikey, payout_ids=[52258, 52257]))
+# print(BlockBeeHelper.create_payout_by_ids(api_key=apikey, payout_ids=['f43b771d-bb26-4dc5-b6d3-3c276d4043e0', '53af840d-b356-46ab-ad0d-f8e3de80b12a']))
 
 """
 Process Payout
 """
-# print(BlockBeeHelper.process_payout(api_key=apikey, payout_id=2468))
+# (BlockBeeHelper.process_payout(api_key=apikey, payout_id="05d28b9e-5a2e-4aa2-9240-16fd65fbce9c"))
 
 """
 Check Payout Status
 """
-# print(BlockBeeHelper.check_payout_status(api_key=apikey, payout_id=2468))
+# print(BlockBeeHelper.check_payout_status(api_key=apikey, payout_id="05d28b9e-5a2e-4aa2-9240-16fd65fbce9c"))
 
 ###
 
