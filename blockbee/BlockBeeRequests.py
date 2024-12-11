@@ -2,8 +2,6 @@ import requests
 import json
 
 from urllib.parse import urljoin, urlencode
-from requests.exceptions import RequestException
-
 
 class BlockBeeAPIException(Exception):
     pass

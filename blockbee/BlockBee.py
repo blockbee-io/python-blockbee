@@ -22,6 +22,8 @@ class BlockBeeHelper:
         if not coin:
             raise Exception('Coin is Missing')
 
+        coin = coin.replace('/', '_')
+
         self.coin = coin
         self.own_address = own_address
         self.callback_url = callback_url

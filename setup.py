@@ -10,7 +10,7 @@ setup(
 
     name='python-blockbee',
 
-    version='2.1.0',
+    version='2.1.1',
 
     packages=find_packages(),
 
@@ -18,7 +18,7 @@ setup(
 
     author_email="info@blockbee.io",
     install_requires=[
-        'requests',
+        "requests",
     ],
     description="Python Library for BlockBee payment gateway",
     long_description_content_type="text/markdown",

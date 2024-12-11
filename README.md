@@ -614,6 +614,9 @@ Contact us @ https://blockbee.io/contacts/
 * Minor bugfixes
 * Improve error handling
 
+#### 2.1.1
+* Minor improvements
+
 ### Breaking Changes
 
 #### 2.0.0

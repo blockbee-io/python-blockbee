@@ -9,7 +9,7 @@ from blockbee import BlockBeeHelper, BlockBeeCheckoutHelper
 apikey = ''  # <- Insert your API Key here to run the tests
 
 bb = BlockBeeHelper(
-    'bep20_usdt',
+    'sol_usdt',
     '',
     'https://webhook.site/15d94bb3-c3ae-4b68-8120-5dd962988a6d',
     {
@@ -70,33 +70,35 @@ Create Payout
 """
 List Payouts
 """
-# print(BlockBeeHelper.list_payouts('polygon_matic', api_key=apikey, payout_request=True, page=1))
+# print(BlockBeeHelper.list_payouts('polygon_pol', status='pending', api_key=apikey, payout_request=True))
 
 """
 Get payout wallet
 """
-# print(BlockBeeHelper.get_payout_wallet('polygon_matic', api_key=apikey, balance=True))
+# print(BlockBeeHelper.get_payout_wallet('polygon_pol', api_key=apikey, balance=True))
 
 """
 Create payout by Payout Request IDs
 """
-# print(BlockBeeHelper.create_payout_by_ids(api_key=apikey, payout_ids=['f43b771d-bb26-4dc5-b6d3-3c276d4043e0', '53af840d-b356-46ab-ad0d-f8e3de80b12a']))
+# print(BlockBeeHelper.create_payout_by_ids(api_key=apikey, payout_ids=[
+#     'e74475bb-87a1-4935-8cc0-d2a7f0cbce16',
+# ]))
 
 """
 Process Payout
 """
-# (BlockBeeHelper.process_payout(api_key=apikey, payout_id="05d28b9e-5a2e-4aa2-9240-16fd65fbce9c"))
+# print(BlockBeeHelper.process_payout(api_key=apikey, payout_id="bb1a462c-b78c-4409-93d9-f3b1328903ec"))
 
 """
 Check Payout Status
 """
-# print(BlockBeeHelper.check_payout_status(api_key=apikey, payout_id="05d28b9e-5a2e-4aa2-9240-16fd65fbce9c"))
+# print(BlockBeeHelper.check_payout_status(api_key=apikey, payout_id="bb1a462c-b78c-4409-93d9-f3b1328903ec").get('payout_info')['status'])
 
 ###
 
-bb_checkout = BlockBeeCheckoutHelper(api_key=apikey, parameters={
-    'order_id': 1324556
-})
+# bb_checkout = BlockBeeCheckoutHelper(api_key=apikey, parameters={
+#     'order_id': 1324556
+# })
 
 """
 Request payment URL
